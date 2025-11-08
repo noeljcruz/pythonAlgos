@@ -18,9 +18,10 @@ def max_pairwise_product(numbers):
     for i in range(n):
         if max_index1 == -1 or numbers[i] > numbers[max_index1]: 
             max_index1 = i
-
+    
     for j in range(n):
-        if j != max_index1 and max_index2 == -1 or numbers[j] > numbers[max_index2]:
+        if j == max_index1: continue
+        if max_index2 == -1 or numbers[j] > numbers[max_index2]:
             max_index2 = j
     
     '''
