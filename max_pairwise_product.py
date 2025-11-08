@@ -12,7 +12,16 @@ the sequence.
 
 def max_pairwise_product(numbers):
     n = len(numbers)
-    max_product = 0
+
+    max_index1 = -1
+    max_index2 = -1
+    for i in range(n):
+        if max_index1 == -1 or numbers[i] > numbers[max_index1]: 
+            max_index1 = i
+
+    for j in range(n):
+        if j != max_index1 and max_index2 == -1 or numbers[j] > numbers[max_index2]:
+            max_index2 = j
     
     '''
     for first in range(n):
@@ -21,7 +30,7 @@ def max_pairwise_product(numbers):
                 numbers[first] * numbers[second])
     '''
 
-    return max_product
+    return numbers[max_index1] * numbers[max_index2]
 
 
 if __name__ == '__main__':
