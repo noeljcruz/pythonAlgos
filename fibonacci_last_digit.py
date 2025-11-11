@@ -17,7 +17,7 @@ def fibonacci_last_digit(n):
         fibo_list.append(fibo_list[i-1] + fibo_list[i-2])
     
     period_place = n % 60
-    return fibo_list[period_place%10]
+    return fibo_list[period_place] % 10
 
     return
 
