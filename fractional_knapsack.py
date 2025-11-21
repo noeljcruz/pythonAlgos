@@ -20,34 +20,24 @@ from sys import stdin
 
 
 def optimal_value(capacity, weights, values):
-    value = 0.
+    value = 0.0
     # write your code here
-    perUnitList = []
-    capacityRemaining = capacity
-    weightsList = list(weights)
-    valuesList = list(values)
+    items = []
 
-    for i in range(len(valuesList)):
-        perUnit = valuesList[i] / weightsList[i]
-        perUnitList.append(perUnit)
+    for v, w in zip(values, weights):
+        if w <= 0:
+            continue
+        items.append((v, w, v/w))
+    items.sort(key=lambda x: x[2], reverse=True)
 
-    while capacityRemaining > 0 and len(perUnitList) > 0:
-        mostValIndex = perUnitList.index(max(perUnitList))
-
-        if capacityRemaining >= weightsList[mostValIndex]:
-            value += valuesList[mostValIndex]
-            capacityRemaining -= weightsList[mostValIndex]
-            perUnitList.remove(perUnitList[mostValIndex])
-            weightsList.remove(weightsList[mostValIndex])
-            valuesList.remove(valuesList[mostValIndex])
-        else:
-            # value += (perUnitList[mostValIndex] * capacityRemaining)
-            value += valuesList[mostValIndex] * (capacityRemaining / weightsList[mostValIndex])
-            capacityRemaining = 0
-
+    for v, w, ratio in items:
+        if capacity == 0:
+            break
+        take = min(w, capacity)
+        value += ratio * take
+        capacity -= take
 
     return value
-
 
 if __name__ == "__main__":
     data = list(map(int, stdin.read().split()))
