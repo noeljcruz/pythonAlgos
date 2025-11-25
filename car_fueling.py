@@ -21,7 +21,26 @@ from sys import stdin
 
 def min_refills(distance, tank, stops):
     # write your code here
-    return -1
+    refills = 0
+    stopsList = list(stops)
+    stopsList.insert(0, 0)
+    stopsList.append(distance)
+    fullTank = tank
+
+    if tank >= distance:
+        return 0
+    
+    for i in range(len(stopsList) - 1):
+        distToNext = stopsList[i + 1] - stopsList[i]
+        if tank >= distToNext:
+            tank -= distToNext
+        else:
+            refills += 1
+            tank = fullTank - distToNext
+            if tank < 0:
+                return -1
+
+    return refills
 
 
 if __name__ == '__main__':
