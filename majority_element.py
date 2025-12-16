@@ -10,11 +10,27 @@ times, and 0 otherwise.
 '''
 
 def majority_element_naive(elements):
-    for e in elements:
-        if elements.count(e) > len(elements) / 2:
-            return 1
 
-    return 0
+    hmap = {}
+    for e in elements:
+        if e in hmap:
+            hmap[e] += 1
+        else:
+            hmap[e] = 1
+    
+    hmapSorted = dict(sorted(hmap.items(), key=lambda item: item[1], reverse=True))
+
+    if list(hmapSorted.values())[0] > len(elements) / 2:
+        return 1
+    else:
+        return 0
+
+
+    # for e in elements:
+    #     if elements.count(e) > len(elements) / 2:
+    #         return 1
+
+    # return 0
 
 
 if __name__ == '__main__':
